@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ict.ex.mapper.BoardMapper">
+    <select id="getBoardList" resultType="edu.ict.ex.vo.BoardVO">
+        SELECT * FROM infotour
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM infotour
+    </select>
+
+    <select id="getBoardDetail" resultType="edu.ict.ex.vo.BoardVO">
+        SELECT * FROM infotour WHERE tour_code = #{tour_code}
+    </select>
+
+    <update id="updateBoard" parameterType="edu.ict.ex.vo.BoardVO">
+        UPDATE infotour
+        SET tour_name = #{tour_name},
+            tour_address = #{tour_address},
+            tour_cmmt = #{tour_cmmt},
+            tour_telno = #{tour_telno},
+            custom_cnt = #{custom_cnt},
+            car_cnt = #{car_cnt}
+        WHERE tour_code = #{tour_code}
+    </update>
+    
+ <insert id="createBoard">
+    INSERT INTO infotour (tour_code, area_code, tour_name, tour_address, tour_cmmt, tour_telno, custom_cnt, car_cnt)
+    VALUES (#{tour_code}, #{area_code}, #{tour_name}, #{tour_address}, #{tour_cmmt}, #{tour_telno}, #{custom_cnt}, #{car_cnt})
+</insert>
+
+
+    <delete id="deleteBoard" parameterType="String">
+        DELETE FROM infotour WHERE tour_code = #{tour_code}
+    </delete>
+</mapper>
